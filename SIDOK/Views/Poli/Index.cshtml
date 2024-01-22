@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SIDOK.Models.Poli>
+
+@{
+    ViewData["Title"] = "Halaman Poli";
+}
+
+<h1>Daftar Poli</h1>
+
+<a class="btn btn-primary my-3" asp-controller="Poli" asp-action="TambahPoli">Create New Poli</a>
+
+<table class="table table-auto">
+    <thead>
+        <tr>
+            <th>Nama</th>
+            <th>Lokasi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var data in Model)
+            {
+                <tr>
+                    <td><a asp-controller="Poli" asp-action="DetailPoli" asp-route-id="@data.Id">@data.Nama</a></td>
+                    <td>@data.Lokasi</td>
+                    <td>
+                        <div class="col">
+                            <a asp-controller="Poli" asp-action="EditPoli" asp-route-id="@data.Id">Edit</a> |
+                            <a asp-controller="Poli" asp-action="Delete" asp-route-id="@data.Id">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+﻿@model SIDOK.Models.JadwalJagaViewModel
+@{
+    ViewData["Title"] = "Halaman Poli Dokter";
+}
+
+
+<h1>Daftar Jaga Poli</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nama Dokter</th>
+            <th>Spesialisasi</th>
+            <th>Hari</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Jadwals)
+        {
+            var dokter = Model.Dokters.Where(x => x.Id == item.DokterId).FirstOrDefault();
+            var spesialis = Model.Spesialisasi.Where(x => x.Id == dokter.SpesialisasiId).FirstOrDefault();
+            <tr>
+                <td>@dokter.Nama</td>
+                <td>@spesialis.Nama</td>
+                <td>@item.Hari</td>
+                <td>
+                    <a asp-controller="Jadwal" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

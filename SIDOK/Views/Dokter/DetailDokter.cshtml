@@ -1,0 +1,90 @@
+﻿@model SIDOK.Models.DokterSpesialisViewModel
+@{
+    ViewData["Title"] = "Detail Dokter";
+
+    var spesialisasi = Model.Spesialisasis.Where(s => s.Id == Model.Dokter.Id).FirstOrDefault();
+}
+
+<h1>Details</h1>
+<h3>Dokter @Html.DisplayFor(model => model.Dokter.Nama)</h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <table style="table-layout:fixed; width:30em">
+            <tr>
+                <td>
+                    Id Dokter
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Dokter.Id)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Nama
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Dokter.Nama)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    NIP
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Dokter.NIP)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    NIK
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Dokter.NIK)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tanggal Lahir
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Dokter.TanggalLahir)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tempat Lahir
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Dokter.TempatLahir)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Jenis Kelamin
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Dokter.JenisKelamin)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Spesialisasi
+                </td>
+                <td>
+                    @spesialisasi.Nama
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Gelar
+                </td>
+                <td>
+                    @spesialisasi.Gelar
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>

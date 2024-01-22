@@ -1,0 +1,35 @@
+﻿@model SIDOK.Models.JadwalJagaViewModel
+@{
+    ViewData["Title"] = "Tambah Jadwal";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Tambah" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mx-2">
+                <label asp-for="Jadwal.DokterId" class="form-label">Nama Dokter</label>
+                <input asp-for="Dokter.Nama" class="form-control" disabled />
+                <input asp-for="Dokter.Id" class="form-control" name="DokterId" type="hidden" />
+                <span asp-validation-for="Dokter.Nama" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-2">
+                <label asp-for="Jadwal.Hari" class="form-label"></label>
+                <input asp-for="Jadwal.Hari" class="form-control" name="Hari" />
+                <span asp-validation-for="Jadwal.Hari" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-2">
+                <label asp-for="Jadwal.PoliId" class="form-label">Nama Poli</label>
+                <select asp-for="Jadwal.PoliId" class="form-select" name="PoliId">
+                    @foreach (var data in Model.Polis)
+                    {
+                        <option value="@data.Id">@data.Nama</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="TambahJadwal" class="btn btn-primary my-5" />
+            </div>
+        </form>
+    </div>
+</div>

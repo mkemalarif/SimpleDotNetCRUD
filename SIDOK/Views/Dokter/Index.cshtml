@@ -1,0 +1,62 @@
+﻿@model SIDOK.Models.DokterSpesialisViewModel
+@{
+    ViewData["Title"] = "Halaman Dokter";
+}
+
+<h1 class="mt-2">Daftar Dokter</h1>
+
+<a class="btn btn-primary my-3" asp-controller="Dokter" asp-action="TambahDokter">Add New Dokter</a>
+
+
+<table class="table table-auto">
+    <thead>
+        <tr>
+            <th>Nama</th>
+            <th>NIP</th>
+            <th>NIK</th>
+            <th>Tanggal Lahir</th>
+            <th>Tempat Lahir</th>
+            <th>Jenis Kelamin</th>
+            <th>Spesialisasi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null)
+        {
+            @foreach (var data in Model.Dokters)
+            {
+                var spesialis = Model.Spesialisasis.Where(x => x.Id == data.Id).FirstOrDefault();
+                <tr>
+                    <td><a asp-controller="Dokter" asp-action="DetailDokter" asp-route-id="@data.Id">@data.Nama</a></td>
+                    <td>@data.NIP</td>
+                    <td>@data.NIK</td>
+                    <td>@data.TanggalLahir.ToString("dd/mm/yyyy")</td>
+                    <td>@data.TempatLahir</td>
+                    @if (data.JenisKelamin == 1)
+                    {
+                        <td>
+                         Laki Laki   
+                        </td>
+                    }
+                    @if (data.JenisKelamin == 2)
+                    {
+                        <td>
+                            Perempuan
+                        </td>
+                    }
+                    <td>@spesialis.Nama</td>
+                    <td>
+                        <div class="col">
+                            <a asp-controller="Jadwal" asp-action="TambahJadwal" asp-route-id="@data.Id">Tambah Jadwal Jaga</a> |
+                            <a asp-controller="Dokter" asp-action="EditDokter" asp-route-id="@data.Id">Edit</a> |
+                            <a asp-controller="Dokter" asp-action="Delete" asp-route-id="@data.Id">Delete</a>
+                        </div>
+                    </td>
+        </tr>
+            }
+        } 
+
+        
+    </tbody>
+</table>

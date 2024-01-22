@@ -1,0 +1,75 @@
+﻿@model SIDOK.Models.JadwalJagaViewModel
+@{
+    ViewData["Title"] = "Jadwal Jaga";
+
+}
+
+<h1>Jadwal Jaga</h1>
+<div class="row">
+    <div class="col-md-3">
+        <form asp-controller="Jadwal" asp-action="Index" method="get">
+        
+                <select class="form-select" asp-for="spesialisasiSearch" asp-items="Model.SPESIALISASI">
+                    <option value="">Semua Spesialisasi</option>
+                </select>
+                <select class="form-select my-3" asp-for="poliSearch" asp-items="Model.POLI">
+                    <option value="">Semua Poli</option>
+                </select>
+
+            <input class="btn btn-primary" type="submit" value="Cari" />
+        </form>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hari</th>
+            <th>Nama Poli</th>
+            <th>Lokasi</th>
+            <th>Nama Dokter</th>
+            <th>NIP</th>
+            <th>NIK</th>
+            <th>Tanggal Lahir</th>
+            <th>Tempat Lahir</th>
+            <th>Jenis Kelamin</th>
+            <th>Spesialisasi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Jadwals)
+        {
+            var poli = Model.Polis.Where(x => x.Id == item.PoliId).FirstOrDefault();
+            if(poli == null)
+            {
+                break;
+            }
+            var dokter = Model.Dokters.Where(x => x.Id == item.DokterId).FirstOrDefault();
+            var spesialis = Model.Spesialisasi.Where(x => x.Id == dokter.SpesialisasiId).FirstOrDefault();
+            <tr>
+                <td>@item.Hari</td>
+                <td>@poli.Nama</td>
+                <td>@poli.Lokasi</td>
+                <td>@dokter.Nama</td>
+                <td>@dokter.NIP</td>
+                <td>@dokter.NIK</td>
+                <td>@dokter.TanggalLahir</td>
+                <td>@dokter.TempatLahir</td>
+                @if(dokter.JenisKelamin == 1)
+                {
+                    <td>Laki Laki</td>
+                }
+                @if(dokter.JenisKelamin == 2)
+                {
+                    <td>Perempuan</td>
+                }
+                <td>@spesialis.Nama</td>
+                <td>
+                    <a asp-controller="Jadwal" asp-action="Delete"></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

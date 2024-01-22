@@ -1,0 +1,56 @@
+﻿@model SIDOK.Models.DokterSpesialisViewModel
+@{
+    ViewData["Title"] = "Tambah Dokter";
+}
+
+<h1>Add New Dokter</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="TambahDokter">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mx-2">
+                <label asp-for="Dokter.Nama" class="form-label"></label>
+                <input asp-for="Dokter.Nama" class="form-control"/>
+                <span asp-validation-for="Dokter.Nama" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-2">
+                <label asp-for="Dokter.NIK" class="form-label"></label>
+                <input asp-for="Dokter.NIK" class="form-control"/>
+                <span asp-validation-for="Dokter.NIK" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-2">
+                <label asp-for="Dokter.TanggalLahir" class="form-label"></label>
+                <input asp-for="Dokter.TanggalLahir" class="form-control" type="Date"/>
+                <span asp-validation-for="Dokter.TanggalLahir" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-2">
+                <label asp-for="Dokter.TempatLahir" class="form-label"></label>
+                <input asp-for="Dokter.TempatLahir" class="form-control"/>
+                <span asp-validation-for="Dokter.TempatLahir" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-2">
+                <label asp-for="Dokter.JenisKelamin" class="form-label">Jenis Kelamin</label>
+                <select asp-for="Dokter.JenisKelamin" class="form-select">
+                    <option value=1 selected>Laki Laki</option>
+                    <option value=2>Perempuan</option>
+                </select>
+                <span asp-validation-for="Dokter.JenisKelamin" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-2">
+                <label asp-for="Dokter.SpesialisasiId" class="form-label"></label>
+                <select asp-for="Dokter.SpesialisasiId" class="form-select">
+                    @foreach(var data in Model.Spesialisasis)
+                    {
+                        <option value="@data.Id">@data.Nama</option>
+                    }
+                </select>
+                <span asp-validation-for="Dokter.SpesialisasiId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="TambahDokter" class="btn btn-primary my-5" />
+            </div>
+        </form>
+    </div>
+</div>
